@@ -1,0 +1,113 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+       <meta http-equiv="x-ua-compatible" content="ie=edge" />
+       <title>New York Hiker</title>
+       <!-- MDB icon -->
+       <!-- link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" / -->
+       <!-- Font Awesome -->
+       <link
+         rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+       />
+       <!-- Google Fonts Roboto -->
+       <link
+         rel="stylesheet"
+         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+       />
+        <!-- MDB Style Sheet -->
+        <link rel="stylesheet" href="{% static 'hike/css/mdb.min.css' %}">
+        <!-- MDB -->
+        <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"
+        ></script>
+        <!-- style -->
+        <link rel="stylesheet" href="{% static 'hike/css/style.css' %}">
+        <!--Sortable-->
+        <!-- <link href="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/sortable.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/sortable.min.js"></script> -->
+    </head>
+    <body>
+        <!--Main Navigation-->
+        <header class="mb-5 mb-lg-7">
+            <!-- Navbar -->
+            <nav style="z-index: 1; min-height: 58.59px;"
+                class="navbar navbar-expand-lg navbar-green navbar-dark">
+            <!-- Container wrapper -->
+            <div class="container">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Navbar brand -->
+                <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'index' %}">
+                    <img src="{% static 'hike/img/icons8-new-york-50.png' %}"></img>
+                    <h2>Hiker</h2>
+                </a>
+      
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-secondary fw-bold" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Hiking Challenges
+                            </a>
+                            <div class="dropdown-menu navbar-green navbar-dark" aria-labelledby="navbarDropdown">
+                                {% for challenge in challenges %}
+                                <a class="dropdown-item text-secondary fw-bold" href="{% url 'challenge' challenge.id %}">{{ challenge.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </li>  
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-secondary fw-bold" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Ranges
+                            </a>
+                            <div class="dropdown-menu navbar-green navbar-dark" aria-labelledby="navbarDropdown">
+                                {% for range in ranges %}
+                                <a class="dropdown-item text-secondary fw-bold" href="#">{{ range.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </li>
+                        {% include './personal_menu.html' %}
+                    </ul>
+                    <!-- Left Links -->
+                </div>
+                <!-- Collapsible wrapper -->
+      
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                    <!-- Icon -->
+                    <a class="text-secondary me-3" href="https://www.youtube.com/channel/UC_rT30SdAjkxg8iCcz3ctCg" rel="nofollow" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <!-- Icon -->
+                    <a class="text-secondary me-3" href="https://twitter.com/ascensus_mdb" rel="nofollow" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <!-- Icon -->
+                    <a class="text-secondary me-3" href="https://github.com/robertyounghome" rel="nofollow" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <!-- Right elements -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+      </header>
+      <main>
+        {% block content %}{% endblock content %}
+      </main>
+    
+    </body>
+  </html>

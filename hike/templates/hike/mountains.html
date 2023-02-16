@@ -1,0 +1,84 @@
+{% if mountains_page_obj %}
+<div class="row">
+    <div class="col text-center">
+        <h2>{{ mountains_completed }} / {{ mountains_page_obj.paginator.count }} Mountains Climbed</h2>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-sm align-middle bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th>Mountain</th>
+            <th>Elevation</th>
+            <th>Status</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mountain in mountains_page_obj %}
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <!-- <img
+                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                    /> -->
+                    {{ mountain.name}}
+              </div>
+            </td>
+            <td>
+                {{ mountain.height }}
+            </td>
+            <td>
+                {% if mountain.rating %} 
+                    <i class="fas fa-check text-success"></i>
+                {% elif mountain in hikes_mountains %} 
+                    <i class="fas fa-clock text-warning"></i>
+                {% endif %}
+            </td>
+            <td>
+                {% if mountain.rating %} 
+                    {% include './rating.html' with rating=mountain.rating %}
+                {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!-- Pagination -->
+<div class="row">
+    <div class="col-4">
+        {{ mountains_page_obj.paginator.num_pages }} page{{ mountains_page_obj.paginator.num_pages|pluralize:"s" }}
+    </div>
+    <div class="col-sm-2 col-md-5"></div>
+    <div class="col-sm-6 col-md-3 pagination">
+        {% if mountains_page_obj.has_previous %}
+        <div class="page-item mx-2">
+            <a class="page-link" href="?page=1" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </div>
+        <div class="page-item">
+            <a class="page-link" href="?page={{ mountains_page_obj.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">{{ mountains_page_obj.previous_page_number }}</span>
+            </a>
+        </div>
+        {% endif %}
+
+        <div class="page-item active"><a class="page-link" href="">{{ mountains_page_obj.number }}</a></div>
+                    
+            {% if mountains_page_obj.has_next %}
+            <div class="page-item"><a class="page-link" href="?mountains_page={{ mountains_page_obj.next_page_number }}">{{ mountains_page_obj.next_page_number }}</a></div>
+            <div class="page-item">
+                <a class="page-link" href="?mountains_page={{ mountains_page_obj.paginator.num_pages }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}

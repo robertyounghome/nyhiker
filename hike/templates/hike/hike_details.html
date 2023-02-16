@@ -1,0 +1,170 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col mb-3 text-center">
+            <h2>{{ hike.name }}
+                {% if hike.completed_on %}
+                &nbsp;-&nbsp;{{ hike.completed_on}}
+                {% endif %}
+            </h2>
+        </div>
+    </div>
+    <div class="row mx-md-5 mx-xs-1 my-md-5 my-xs-1 mb-3">
+        <div class="col-lg-5 mb-3">
+            <div class="card">
+                <div class="row mx-5 my-5 mb-1">
+                    <div class="col-4">
+                        Range
+                    </div>
+                    <div class="col-8">
+                        {{ hike.range }}    
+                    </div>
+                </div>
+                {% if hike.grade %}
+                <div class="row mx-5 my-5 mb-1">
+                    <div class="col-4">
+                        Overall Difficulty
+                    </div>
+                    <div class="col-8">
+                        {% if hike.grade.name == "Easy" %}
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-3x fa-solid fa-hiking text-success"></i>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col d-flex align-items-center text-success">(Easy)</div>
+                            </div>
+                        {% elif hike.grade.name == "Moderate" %} 
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-3x fa-solid fa-hiking text-warning"></i>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col d-flex align-items-center text-warning">(Moderate)</div>
+                            </div>
+                        {% elif hike.grade.name == "Difficult" %} 
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-3x fa-solid fa-hiking text-danger"></i>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col d-flex align-items-center text-danger">(Difficult)</div>
+                            </div>
+                        {% else %} 
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fas fa-3x fa-solid fa-hiking"></i>
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col d-flex align-items-center">(Very Difficult)</div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="row mx-5 my-5 mb-1">
+                    <div class="col-4">
+                        Duration in Hours
+                    </div>
+                    <div class="col-8">
+                        {% include "./progress_bar.html" with decimal=hike_duration_decimal pct=hike_duration_pct max_value=hike_duration_max_value value=hike.duration %}
+                    </div>
+                </div>
+                <div class="row mx-5 my-5 mb-1">
+                    <div class="col-4">
+                        Mileage
+                    </div>
+                    <div class="col-8">
+                        {% include "./progress_bar.html" with decimal=hike_mileage_decimal pct=hike_mileage_pct max_value=hike_mileage_max_value value=hike.mileage %}
+                    </div>
+                </div>
+                <div class="row mx-5 my-5 mb-1">
+                    <div class="col-4">
+                        Elevation Gain
+                    </div>
+                    <div class="col-8">
+                        {% include "./progress_bar.html" with decimal=hike_gain_decimal pct=hike_gain_pct max_value=hike_gain_max_value value=hike.gain %}
+                    </div>
+                </div>
+                {% if hike.rating %}
+                <div class="row mx-5 my-5 mb-1">
+                    <div class="col-4">
+                        Hike Rating
+                    </div>
+                    <div class="col-8">
+                        {% include "./rating.html" with rating=hike.rating %}
+                    </div>
+                </div>
+                {% endif %}
+                {% if weather %}
+                <div class="row mx-5 my-5 mb-1">
+                    <div class="col-4">
+                        Weather Conditions
+                    </div>
+                    <div class="col-8">
+                        {% for name in weather %}
+                            {% if name == "Sunny" %} 
+                                <i class="fas fa-sun text-warning"></i>
+                            {% endif %}
+                            {% if name == "Rainy" %} 
+                                <i class="fas fa-sharp fa-solid fa-cloud-showers-heavy"></i>
+                            {% endif %}
+                            {% if name == "Showers" %} 
+                                <i class="fas fa-umbrella"></i>
+                            {% endif %}
+                            {% if name == "Cloudy" %} 
+                                <i class="fas fa-sharp fa-solid fa-cloud"></i>
+                            {% endif %}
+                            {% if name == "Foggy" %} 
+                                <i class="fas fa-solid fa-cloud-fog"></i>
+                            {% endif %}
+                            {% if name == "Windy" %} 
+                                <i class="fas fa-solid fa-wind"></i>
+                            {% endif %}
+                            {% if name == "Heat" %} 
+                                <i class="fas fa-solid fa-heat text-danger"></i>
+                            {% endif %}
+                            {% if name == "Snowy" %} 
+                                <i class="fas fa-solid fa-snowflake"></i>
+                            {% endif %}
+                            {% if name == "Icy" %} 
+                                <i class="fas fa-solid fa-icicles"></i>
+                            {% endif %}
+                            {% if name == "Cold" %} 
+                                <i class="fas fa-solid fa-hat-winter"></i>
+                            {% endif %}
+                            {% if name == 'Muddy' %} 
+                                <i class="fa-duotone fa-pig"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="row mx-5 my-5 mb-3">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-6">
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    {% include "./carousel.html" %}
+                </div>
+                <div class="col-lg-6">
+                </div>
+
+            </div>
+            {% if hike.alltrails %}
+            <div class="row">
+                <div class="col">
+                    <iframe class="alltrails" src="{{ hike.alltrails }}" width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="AllTrails: Trail Guides and Maps for Hiking, Camping, and Running"></iframe>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+{% endblock content %}

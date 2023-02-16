@@ -1,0 +1,109 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block content %}
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row mb-3">
+                    <div class="col text-center">
+                        {% with 'hike/img/'|add:challenge.name_small|add:'.jpg' as logo_static %}
+                            <img src="{% static logo_static %}"></img>
+                        {% endwith %}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col text-center">
+                        <h2>{{ challenge.name }}</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <h4>{{ hikes_completed }} / {{ hikes_page_obj.paginator.count }} Hikes Completed </h4>
+                    </div>
+                </div>
+                <div class="row mb-3 mx-3 justify-content-center">
+
+                    {% for hike in hikes_page_obj %}
+                        {% with "hike/img/"|add:hike.name_small|add:".jpg" as hike_img %}
+                    <div class="col-xxl-3 col-xl-6 col-sm-12 text-center mb-2">
+                        <div class="card h-100">
+                            {% if hike.completed_on %}
+                                <div class="card-header text-center" style="background-color: rgb(0, 80, 0); color: white"><strong>Completed</strong>
+                                </div>
+                            {% else %} 
+                                <div class="card-header text-center" style="background-color: rgb(218, 165, 20); color: white "><strong>Planned</strong>
+                                </div>
+                            {% endif %}
+                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                <img src="{% static hike_img %}" class="img-fluid"/>
+                                <a href="#!">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">{{ hike.name }}</h6>
+                                <p class="card-text">{{ hike.description }}</p>
+                                {% if hike.completed_on %} 
+                                    <a href="{% url 'hike_details' hike.id %}" class="btn btn-success">Hike Details</a>
+                                {% else %} 
+                                    <a href="{% url 'hike_details' hike.id %}" class="btn btn-warning">Hike Details</a>                                   
+                                {% endif %} 
+                            </div>
+                        </div>
+                        <!-- class card -->
+                    </div>
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+                {% if hikes_page_obj.paginator.count > 0 %}
+                <div class="row mb-3 mx-3 justify-content-center">
+                    <div class="col">
+                    <div class="row">
+                    <!-- Pagination -->
+                        <div class="col-4">
+                            {{ hikes_page_obj.paginator.num_pages }} page{{ hikes_page_obj.paginator.num_pages|pluralize:"s" }}
+                        </div>
+                        <div class="col-sm-2 col-md-5"></div>
+                        <div class="col-sm-6 col-md-3 pagination">
+                            {% if hikes_page_obj.has_previous %}
+                            <div class="page-item mx-2">
+                                <a class="page-link" href="?page=1" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </div>
+                            <div class="page-item">
+                                <a class="page-link" href="?page={{ hikes_page_obj.previous_page_number }}" aria-label="Previous">
+                                    <span aria-hidden="true">{{ hikes_page_obj.previous_page_number }}</span>
+                                </a>
+                            </div>
+                            {% endif %}
+                
+                            <div class="page-item active"><a class="page-link" href="">{{ hikes_page_obj.number }}</a></div>
+                                                    
+                                {% if hikes_page_obj.has_next %}
+                                <div class="page-item"><a class="page-link" href="?hikes_page={{ hikes_page_obj.next_page_number }}">{{ hikes_page_obj.next_page_number }}</a></div>
+                                    <div class="page-item">
+                                        <a class="page-link" href="?hikes_page={{ mountains_page_obj.paginator.num_pages }}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endif %}
+            <!-- <div class="col-lg-1"></div> -->
+            <div class="col-md-5">
+                <div class="row mx-1 my-1">
+                    <div class="col">
+                        {% include "./mountains.html" %}
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-1"></div> -->
+        </div>
+
+{% endblock content %}

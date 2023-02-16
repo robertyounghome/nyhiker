@@ -1,0 +1,257 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+       <meta http-equiv="x-ua-compatible" content="ie=edge" />
+       <title>New York Hiker</title>
+       <!-- MDB icon -->
+       <!-- link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" / -->
+       <!-- Font Awesome -->
+       <link
+         rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+       />
+       <!-- Google Fonts Roboto -->
+       <link
+         rel="stylesheet"
+         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+       />
+        <!-- MDB Style Sheet -->
+        <link rel="stylesheet" href="{% static 'hike/css/mdb.min.css' %}">
+        <!-- style -->
+        <link rel="stylesheet" href="{% static 'hike/css/style.css' %}">
+        <!-- MDB -->
+        <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"
+        ></script>
+    </head>
+    <body>
+        <!--Main Navigation-->
+        <header class="mb-5 mb-lg-7">
+    
+            <!-- Navbar -->
+            <nav style="z-index: 1; min-height: 58.59px;"
+                class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <!-- Container wrapper -->
+            <div class="container">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+      
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                        <img src="{% static 'hike/img/icons8-new-york-50.png' %}"></img>
+                        <h2>Hiker</h2>
+                    </a>
+            
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-secondary fw-bold" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Hiking Challenges
+                            </a>
+                            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                {% for challenge in challenges %}
+                                <a class="dropdown-item text-secondary fw-bold" href="{% url 'challenge' challenge.id %}">{{ challenge.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </li>  
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-secondary fw-bold" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Ranges
+                            </a>
+                            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                {% for range in ranges %}
+                                <a class="dropdown-item text-secondary fw-bold" href="#">{{ range.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </li>  
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-secondary fw-bold" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                About Me
+                            </a>
+                            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-secondary fw-bold" href="#">Why do Hiking Challenges?</a>
+                                <a class="dropdown-item text-secondary fw-bold" href="#">Computer Programming</a>
+                                <a class="dropdown-item text-secondary fw-bold" href="#">Computer Builds and Hardware</a>
+                                <a class="dropdown-item text-secondary fw-bold" href="#">Soccer Refereeing</a>
+                            </div>
+                        </li>  
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary fw-bold" href="#">Contact</a>
+                        </li>
+                    </ul>
+                    <!-- Left Links -->
+                </div>
+                <!-- Collapsible wrapper -->
+      
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                    <!-- Icon -->
+                    <a class="text-secondary me-3" href="https://www.youtube.com/c/Mdbootstrap/videos" rel="nofollow" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <!-- Icon -->
+                    <a class="text-secondary me-3" href="https://twitter.com/ascensus_mdb" rel="nofollow" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <!-- Icon -->
+                    <a class="text-secondary me-3" href="https://github.com/mdbootstrap/mdb-ui-kit" rel="nofollow" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <!-- Right elements -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+      </header>
+    
+    
+      <main>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row mb-3">
+                    <div class="col text-center">
+                        <img src="{% static 'hike/img/adk46.jpg' %}" width="200px"></img>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col text-center">
+                        <h2>{{ challenge.name }}</h2>
+                    </div>
+                </div>
+                <div class="row mb-3 mx-3 justify-content-center">
+
+                    {% for hike in hikes_page_obj %}
+                        {% with "hike/img/"|add:hike.name_small|add:".jpg" as hike_img %}
+                    <div class="col-xxl-3 col-xl-6 col-sm-12 text-center mb-5">
+                        <div class="card h-100">
+                            {% if hike.completed_on %}
+                                <div class="card-header text-center" style="background-color: rgb(0, 60, 0); color: white"><strong>Completed</strong>
+                                </div>
+                            {% else %} 
+                                <div class="card-header text-center" style="background-color: rgba(192, 0, 0); color: white"><strong>Planned</strong>
+                                </div>
+                            {% endif %}
+                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                <img src="{% static hike_img %}" class="img-fluid"/>
+                                <a href="#!">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ hike.name }}</h5>
+                                <p class="card-text">{{ hike.description }}</p>
+                                <a href="#!" class="btn btn-primary">Hike Details</a>
+                            </div>
+                        </div>
+                        <!-- class card -->
+                    </div>
+                    {% endwith %}
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- <div class="col-lg-1"></div> -->
+            <div class="col-md-5 mx-5">
+                {% if mountains_page_obj %}
+                <div class="row">
+                    <div class="col text-center">
+                        <h2>{{ mountains_completed }} / {{ mountains_page_obj.paginator.count }} Mountains Climbed</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <table class="table table-sm align-middle bg-white">
+                        <thead class="bg-light">
+                          <tr>
+                            <th>Mountain</th>
+                            <th>Elevation</th>
+                            <th>Completed?</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for mountain in mountains_page_obj %}
+                          <tr>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <!-- <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                                    /> -->
+                                    {{ mountain.name}}
+                              </div>
+                            </td>
+                            <td>
+                                {{ mountain.height }}
+                            </td>
+                            <td>
+                                {% if mountain.rating %} 
+                                <i class="fas fa-check text-success"></i>
+                                {% endif %}
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            {{ mountains_page_obj.paginator.num_pages }} page{{ mountains_page_obj.paginator.num_pages|pluralize:"s" }}
+                        </div>
+                        <div class="col-sm-2 col-md-5"></div>
+                        <div class="col-sm-6 col-md-3 pagination">
+                                    {% if mountains_page_obj.has_previous %}
+                                    <div class="page-item mx-2">
+                                        <a class="page-link" href="?page=1" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </div>
+                                    <div class="page-item">
+                                        <a class="page-link" href="?page={{ mountains_page_obj.previous_page_number }}" aria-label="Previous">
+                                            <span aria-hidden="true">{{ mountains_page_obj.previous_page_number }}</span>
+                                        </a>
+                                    </div>
+                                    <!-- {% if mountains_page_obj.previous_page_number.previous_page_number %} 
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ mountains_page_obj.previous_page_number.previous_page_number }}" aria-label="Previous2">
+                                                <span aria-hidden="true">{{ mountains_page_obj.previous_page_number.previous_page_number }}</span>
+                                            </a>
+                                        </li>
+                                    {% endif %} -->
+                                    {% endif %}
+
+                                    <div class="page-item active"><a class="page-link" href="">{{ mountains_page_obj.number }}</a></div>
+                                    
+                                    {% if mountains_page_obj.has_next %}
+                                    <div class="page-item"><a class="page-link" href="?page={{ mountains_page_obj.next_page_number }}">{{ mountains_page_obj.next_page_number }}</a></div>
+                                    <div class="page-item">
+                                      <a class="page-link" href="?page={{ mountains_page_obj.paginator.num_pages }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                      </a>
+                                    </div>
+                                    {% endif %}
+                            <!-- </nav> 
+
+                        </span> -->
+                      </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-1"></div>
+        </div>
+      </main>
+    
+      </body>
+    </html>
