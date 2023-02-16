@@ -102,7 +102,7 @@
                 {% if weather %}
                 <div class="row mx-5 my-5 mb-1">
                     <div class="col-4">
-                        Weather Conditions
+                        Conditions
                     </div>
                     <div class="col-8">
                         {% for name in weather %}
@@ -113,7 +113,7 @@
                                 <i class="fas fa-sharp fa-solid fa-cloud-showers-heavy"></i>
                             {% endif %}
                             {% if name == "Showers" %} 
-                                <i class="fas fa-umbrella"></i>
+                                <i class="fas fa-umbrella text-primary"></i>
                             {% endif %}
                             {% if name == "Cloudy" %} 
                                 <i class="fas fa-sharp fa-solid fa-cloud"></i>
@@ -122,7 +122,7 @@
                                 <i class="fas fa-solid fa-cloud-fog"></i>
                             {% endif %}
                             {% if name == "Windy" %} 
-                                <i class="fas fa-solid fa-wind"></i>
+                                <i class="fas fa-solid fa-wind text-info"></i>
                             {% endif %}
                             {% if name == "Hot" %} 
                                 <i class="fas fa-solid fa-temperature-full text-danger"></i>
@@ -131,13 +131,19 @@
                                 <i class="fas fa-solid fa-snowflake"></i>
                             {% endif %}
                             {% if name == "Icy" %} 
-                                <i class="fas fa-solid fa-icicles text-secondary"></i>
+                                <i class="fas fa-solid fa-icicles text-info"></i>
                             {% endif %}
                             {% if name == "Cold" %} 
                                 <i class="fas fa-solid fa-mitten text-primary"></i>
                             {% endif %}
                             {% if name == 'Muddy' %} 
-                                <i class="fa-duotone fa-pig"></i>
+                                <i class="fa-solid fa-bath"></i>
+                            {% endif %}
+                            {% if name == 'Navigation' %} 
+                                <i class="fa-solid fa-compass text-primary"></i>
+                            {% endif %}
+                            {% if name == 'Dense' %} 
+                                <i class="fa-solid fa-tree text-success"></i>
                             {% endif %}
                         {% endfor %}
                     </div>
