@@ -1,13 +1,16 @@
-{% if rating > 1 %}
+{% if rating < 1 %} 
+<i class="fas fa-regular fa-thumbs-down"></i>
+{% endif %}
+{% if rating >= 1 %}
 <i class="fas fa-regular fa-thumbs-up text-success"></i>
 {% endif %}
-{% if rating > 2 %}
+{% if rating >= 2 %}
 <i class="fas fa-regular fa-thumbs-up text-success"></i>
 {% endif %}
-{% if rating > 3 %}
+{% if rating >= 3 %}
 <i class="fas fa-regular fa-thumbs-up text-success"></i>
 {% endif %}
-{% if rating > 4 %}
+{% if rating >= 4 %}
 <i class="fas fa-regular fa-thumbs-up text-success"></i>
 {% endif %}
 {% if rating == 5 %}
