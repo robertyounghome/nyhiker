@@ -57,12 +57,12 @@
     <div class="col-sm-6 col-md-3 pagination">
         {% if mountains_page_obj.has_previous %}
         <div class="page-item mx-2">
-            <a class="page-link" href="?page=1" aria-label="Previous">
+            <a class="page-link" href="?mountains_page=1" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </div>
         <div class="page-item">
-            <a class="page-link" href="?page={{ mountains_page_obj.previous_page_number }}" aria-label="Previous">
+            <a class="page-link" href="?mountains_page={{ mountains_page_obj.previous_page_number }}" aria-label="Previous">
                 <span aria-hidden="true">{{ mountains_page_obj.previous_page_number }}</span>
             </a>
         </div>

@@ -33,7 +33,8 @@ class MountainForm(forms.ModelForm):
 @admin.register(Mountain)
 class MountainAdmin(admin.ModelAdmin):
     form = MountainForm
-    list_display = ('name', 'range')
+    list_display = ('name', 'range', 'rating')
+    list_editable = ('range', 'rating')
 
 admin.site.register(Range)
 admin.site.register(HikeDetail)

@@ -1,0 +1,1 @@
+[{"model": "hike.grade", "pk": 1, "fields": {"name": "Easy"}}, {"model": "hike.grade", "pk": 2, "fields": {"name": "Moderate"}}, {"model": "hike.grade", "pk": 3, "fields": {"name": "Difficult"}}, {"model": "hike.grade", "pk": 4, "fields": {"name": "Very Difficult"}}]

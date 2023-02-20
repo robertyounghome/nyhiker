@@ -9,7 +9,7 @@ class Range(models.Model):
 class Mountain(models.Model):
     name = models.CharField(max_length=50)
     height = models.IntegerField()
-    rating = models.DecimalField(null=True, decimal_places=1, max_digits=2)
+    rating = models.DecimalField(null=True, blank=True, decimal_places=1, max_digits=2)
     range = models.ForeignKey(Range, on_delete=models.CASCADE)
 
     class Meta:
@@ -36,7 +36,7 @@ class Grade(models.Model):
 
 class Hike(models.Model):
     name = models.CharField(max_length=50)
-    name_small = models.CharField(max_length=10)
+    name_small = models.CharField(max_length=10, null=True)
     description = models.TextField(null=True)
     range = models.ForeignKey(Range, on_delete=models.CASCADE, null=True)
     duration = models.DecimalField(null=True, decimal_places=2, max_digits=4)

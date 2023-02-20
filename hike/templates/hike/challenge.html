@@ -68,12 +68,12 @@
                         <div class="col-sm-6 col-md-3 pagination">
                             {% if hikes_page_obj.has_previous %}
                             <div class="page-item mx-2">
-                                <a class="page-link" href="?page=1" aria-label="Previous">
+                                <a class="page-link" href="?hikes_page=1" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </div>
                             <div class="page-item">
-                                <a class="page-link" href="?page={{ hikes_page_obj.previous_page_number }}" aria-label="Previous">
+                                <a class="page-link" href="?hikes_page={{ hikes_page_obj.previous_page_number }}" aria-label="Previous">
                                     <span aria-hidden="true">{{ hikes_page_obj.previous_page_number }}</span>
                                 </a>
                             </div>
@@ -84,7 +84,7 @@
                                 {% if hikes_page_obj.has_next %}
                                 <div class="page-item"><a class="page-link" href="?hikes_page={{ hikes_page_obj.next_page_number }}">{{ hikes_page_obj.next_page_number }}</a></div>
                                     <div class="page-item">
-                                        <a class="page-link" href="?hikes_page={{ mountains_page_obj.paginator.num_pages }}" aria-label="Next">
+                                        <a class="page-link" href="?hikes_page={{ hikes_page_obj.paginator.num_pages }}" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </div>

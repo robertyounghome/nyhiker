@@ -4,3 +4,4 @@ python ../../manage.py dumpdata hike.Condition -o condition.json
 python ../../manage.py dumpdata hike.Hike -o hike.json
 python ../../manage.py dumpdata hike.HikeDetail -o hikeDetail.json
 python ../../manage.py dumpdata hike.Challenge -o challenge.json
+python ../../manage.py dumpdata hike.Grade -o grade.json
