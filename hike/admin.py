@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib import admin
-from .models import Range, Mountain, Hike, HikeDetail, Challenge, Condition, Grade
+from .models import Range, Mountain, Hike, HikeDetail, Challenge, Condition, Grade, TrailLink
 
 class HikeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -41,3 +41,4 @@ admin.site.register(HikeDetail)
 admin.site.register(Challenge)
 admin.site.register(Condition)
 admin.site.register(Grade)
+admin.site.register(TrailLink)

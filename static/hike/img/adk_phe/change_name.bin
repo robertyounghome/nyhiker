@@ -1,0 +1,2 @@
+--upper and lowercase matters, change all .JPEG to .jpg
+find . -name "*.JPEG" -type f -exec rename 's/\.JPEG$/.jpg/' \{} \;

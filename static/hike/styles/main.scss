@@ -1,0 +1,36 @@
+$hike-green: rgb(0, 80, 0);
+$hike-dark-red: rgb(120, 0, 0);
+
+.navbar-green {
+    background: $hike-green !important;
+}
+.green {
+    background: $hike-green;
+}
+.bg-difficult {
+    background: $hike-dark-red !important;
+}
+.bg-very-difficult {
+    background: black !important;
+}
+.bgded {
+    background-image: url('../img/dial.jpg');
+}
+.card .card-body .card-text {
+    color: #747373;
+    font-size: 12px !important;
+    font-weight: 400;
+}
+.progress {
+    height: 30px !important;
+}
+.progress-desc div {
+    text-align: right;
+    font-size: 10px !important;
+}
+.text-black {
+    color: black;
+}
+.text-red {
+    color:  $hike-dark-red;
+}

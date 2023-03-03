@@ -51,6 +51,14 @@ class Hike(models.Model):
 
     def __str__(self):
         return self.name
+    
+class TrailLink(models.Model):
+    hike = models.ForeignKey(Hike, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    link = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.hike} : {self.name}"
 
 class HikeDetail(models.Model):
     hike = models.ForeignKey(Hike, on_delete=models.CASCADE)

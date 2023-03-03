@@ -3,9 +3,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- {% load sass_tags %}
+            <link rel="stylesheet" type="text/css" href="{% static 'hike/styles/main.scss' %}">  -->
+
 {% load compress %}
 {% compress css %}
-    <link type="text/x-scss" href="{% static 'hike/styles/main.scss' %}" rel="stylesheet" media="screen" />
+    <link type="text/x-scss" href="{% static 'hike/styles/main.scss' %}" rel="stylesheet" media="screen" >
 {% endcompress %}
 
        <meta charset="UTF-8" />

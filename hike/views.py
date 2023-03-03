@@ -72,10 +72,12 @@ def challenge(request, challenge_id):
     hikes = challenge.hikes.all().order_by("-completed_on")
     # context["hikes"] = hikes
     context["hikes_completed"] = len([1 for hike in hikes if hike.completed_on])
+    context["hikes_planned"] = len(hikes) - context["hikes_completed"]
+    
     mountains = challenge.mountains.all().order_by("name")
     context["mountains_completed"] = len([1 for mountain in mountains if mountain.rating])
 
-    hikes_paginator = Paginator(hikes, 4)
+    hikes_paginator = Paginator(hikes, 3)
     hikes_page_number = request.GET.get('hikes_page')
     hikes_page_obj = hikes_paginator.get_page(hikes_page_number)
     context["hikes_page_obj"] = hikes_page_obj

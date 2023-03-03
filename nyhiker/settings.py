@@ -15,6 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_DIR = os.path.join(BASE_DIR, 'static') 
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,13 +27,14 @@ SECRET_KEY = 'django-insecure-+q8hi-z=ef@)fi%_th)-#b$et69%b_&i1k9z45+zl(j4_o!yu!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['test', 'localhost', '0.0.0.0']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'hike.apps.HikeConfig',
+    'sass_processor',
     'compressor',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -124,9 +126,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# STATICFILES_DIRS = [
+#     STATIC_DIR,
+# ]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/') 
 
-print(f"here: {STATIC_ROOT}")
+# print(f"here: {STATIC_ROOT}")
 
 STATICFILES_FINDERS =( 'django.contrib.staticfiles.finders.FileSystemFinder',
       'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -136,6 +142,20 @@ STATICFILES_FINDERS =( 'django.contrib.staticfiles.finders.FileSystemFinder',
 COMPRESS_PRECOMPILERS = (    
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
+
+# The directory where your SCSS files are located
+# SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static', 'hike/styles')
+
+# # The directory where your compiled CSS files should be stored
+# SASS_PROCESSOR_OUTPUT_DIR = 'css'
+
+# # The style of CSS output (e.g. compact, compressed, expanded, nested)
+# SASS_PREPROCESSOR_STYLE = 'compressed'
+
+# A list of additional include paths for SASS compilation
+# SASS_PROCESSOR_INCLUDE_DIRS = [
+#     os.path.join(BASE_DIR, 'static', 'scss', 'includes')
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
