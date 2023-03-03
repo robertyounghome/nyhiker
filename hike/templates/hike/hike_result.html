@@ -1,0 +1,80 @@
+<div class="row">
+    <table class="table table-sm align-middle bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th>Hike</th>
+            <th>Range</th>
+            <th>Duration</th>
+            <!-- <th>Status</th> -->
+            <th>Rating</th>
+            <th>Conditions</th>
+            <th>Mileage</th>
+            <th>Gain</th>
+            <th>Date Completed</th>
+            <th>Mountains</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for hike in hikes %}
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <!-- <img
+                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                    /> -->
+                    <a href="{% url 'hike_details' hike.id %}">{{ hike.name}}</a>
+              </div>
+            </td>
+            <td>
+                {{ hike.range }}
+            </td>
+            <td>
+                {{ hike.duration }}
+            </td>
+            <!-- <td>
+                {% if hike.rating %} 
+                    <i class="fas fa-check text-success"></i>
+                {% else %} 
+                    <i class="fas fa-clock text-warning"></i>
+                {% endif %}
+            </td> -->
+            <td>
+                {% if hike.rating %} 
+                    {% include './rating.html' with rating=hike.rating %}
+                {% endif %}
+            </td>
+            <td>
+                {{ hike.conditions }}
+            </td>
+            <td>
+                {{ hike.mileage }}
+            </td>
+            <td>
+                {{ hike.gain }}
+            </td>
+            <td>
+                {{ hike.completed_on }}
+            </td>
+            <td>
+                {{ hike.mountains }}
+            </td>
+            <td>
+                {% if hike.grade.name == "Easy" %}
+                    <i class="fas fa-solid fa-hiking text-success"></i>
+                {% elif hike.grade.name == "Moderate" %} 
+                    <i class="fas fa-solid fa-hiking text-warning"></i>
+                {% elif hike.grade.name == "Difficult" %} 
+                    <i class="fas fa-solid fa-hiking text-danger"></i>
+                {% else %} 
+                    <i class="fas fa-solid fa-hiking"></i>
+                {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>

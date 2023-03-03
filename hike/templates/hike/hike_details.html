@@ -29,39 +29,7 @@
                         Overall Difficulty
                     </div>
                     <div class="col-8">
-                        {% if hike.grade.name == "Easy" %}
-                            <div class="row">
-                                <div class="col-2">
-                                    <i class="fas fa-3x fa-solid fa-hiking text-success"></i>
-                                </div>
-                                <div class="col-1"></div>
-                                <div class="col d-flex align-items-center text-success">(Easy)</div>
-                            </div>
-                        {% elif hike.grade.name == "Moderate" %} 
-                            <div class="row">
-                                <div class="col-2">
-                                    <i class="fas fa-3x fa-solid fa-hiking text-warning"></i>
-                                </div>
-                                <div class="col-1"></div>
-                                <div class="col d-flex align-items-center text-warning">(Moderate)</div>
-                            </div>
-                        {% elif hike.grade.name == "Difficult" %} 
-                            <div class="row">
-                                <div class="col-2">
-                                    <i class="fas fa-3x fa-solid fa-hiking text-danger"></i>
-                                </div>
-                                <div class="col-1"></div>
-                                <div class="col d-flex align-items-center text-danger">(Difficult)</div>
-                            </div>
-                        {% else %} 
-                            <div class="row">
-                                <div class="col-2">
-                                    <i class="fas fa-3x fa-solid fa-hiking"></i>
-                                </div>
-                                <div class="col-1"></div>
-                                <div class="col d-flex align-items-center">(Very Difficult)</div>
-                            </div>
-                        {% endif %}
+                        {% include "./difficulty.html" %}
                     </div>
                 </div>
                 {% endif %}

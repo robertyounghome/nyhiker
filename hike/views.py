@@ -64,6 +64,17 @@ def hike_details(request, hike_id):
     template = loader.get_template('hike/hike_details.html')
     return HttpResponse(template.render(context, request))
 
+def search(request, type):
+    context = getContext()
+    context["type"] = type 
+    mountains = Mountain.objects.order_by("name")
+    hikes = Hike.objects.order_by("range", "name")
+    print(len(mountains))
+    context["mountains"] = mountains 
+    context["hikes"] = hikes 
+    template = loader.get_template('hike/search.html')
+    return HttpResponse(template.render(context, request))    
+
 def challenge(request, challenge_id):
     context = getContext()
     challenge = Challenge.objects.get(id=challenge_id)

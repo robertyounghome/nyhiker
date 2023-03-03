@@ -1,0 +1,48 @@
+<div class="row">
+    <table class="table table-sm align-middle bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th>Mountain</th>
+            <th>Range</th>
+            <th>Elevation</th>
+            <th>Status</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mountain in mountains %}
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <!-- <img
+                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                    /> -->
+                    {{ mountain.name}}
+              </div>
+            </td>
+            <td>
+                {{ mountain.range }}
+            </td>
+            <td>
+                {{ mountain.height }}
+            </td>
+            <td>
+                {% if mountain.rating %} 
+                    <i class="fas fa-check text-success"></i>
+                {% elif mountain in hikes_mountains %} 
+                    <i class="fas fa-clock text-warning"></i>
+                {% endif %}
+            </td>
+            <td>
+                {% if mountain.rating %} 
+                    {% include './rating.html' with rating=mountain.rating %}
+                {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>

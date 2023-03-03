@@ -4,8 +4,8 @@
         Search
     </a>
     <div class="dropdown-menu navbar-green navbar-dark" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item text-secondary fw-bold" href="#">Search for Hikes</a>
-        <a class="dropdown-item text-secondary fw-bold" href="#">Search for Mountains</a>
+        <a class="dropdown-item text-secondary fw-bold" href="{% url 'search' 'hikes' %}">Search for Hikes</a>
+        <a class="dropdown-item text-secondary fw-bold" href="{% url 'search' 'mountains' %}">Search for Mountains</a>
     </div>
 </li>
 <li class="nav-item dropdown">

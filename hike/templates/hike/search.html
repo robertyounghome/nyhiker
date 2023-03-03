@@ -1,0 +1,28 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% if type == "hikes" %} 
+
+<div class="col-md-12">
+    <div class="row mx-1 my-1">
+        <div class="col">
+            {% include "./hike_result.html" %}
+        </div>
+    </div>
+</div>
+
+{% else %} 
+
+<div class="col-md-12">
+    <div class="row mx-1 my-1">
+        <div class="col">
+            {% include "./mountain_result.html" %}
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock content %} 
+
