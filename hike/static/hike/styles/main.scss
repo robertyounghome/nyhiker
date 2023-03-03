@@ -1,11 +1,17 @@
 $hike-green: rgb(0, 80, 0);
+$hike-yellow: rgb(218, 165, 20);
 $hike-dark-red: rgb(120, 0, 0);
 
 .navbar-green {
     background: $hike-green !important;
 }
 .green {
-    background: $hike-green;
+    background: $hike-green !important;
+    color: white !important;
+}
+.yellow {
+    background: $hike-yellow !important;
+    color: white !important;
 }
 .bg-difficult {
     background: $hike-dark-red !important;
@@ -34,9 +40,14 @@ $hike-dark-red: rgb(120, 0, 0);
 .text-red {
     color:  $hike-dark-red;
 }
-.vcenter {
-    display: flex;
-    // flex: 1 0 50%;
-    // align-items: center;
-    justify-content: center;
-}
+.page-item.active .page-link {
+    color:  $hike-green !important;
+    background: lightgray !important;
+  }
+
+// .vcenter {
+//     display: flex;
+//     // flex: 1 0 50%;
+//     // align-items: center;
+//     justify-content: center;
+// }

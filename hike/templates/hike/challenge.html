@@ -10,18 +10,18 @@
 
                 <div class="card h-100">
                     {% if challenge.completed_on %}
-                        <div class="card-header text-center" style="background-color: rgb(0, 80, 0); color: white"><h2>{{ challenge.name }}</h2>
-                        </div>
-                    {% else %} 
-                        <div class="card-header text-center" style="background-color: rgb(218, 165, 20); color: white "><h2>{{ challenge.name }}</h2>
-                        </div>
+                        <div class="card-header text-center green"><h2>{{ challenge.name }}</h2></div>
+                    {% elif hikes_completed > 0 %} 
+                        <div class="card-header text-center green"><h2>{{ challenge.name }}</h2></div>
+                    {% else %}
+                        <div class="card-header text-center yellow"><h2>{{ challenge.name }}</h2></div>
                     {% endif %}
                         <div class="card-body">
                             
                             <div class="row mb-3">
                                 <div class="col-xl-1"></div>
                                 <div class="col-xl-5">
-                                    <div class="row mb-3">
+                                    <div class="row mb-3 mt-3">
                                         <div class="col text-center">
                                             {% with 'hike/img/'|add:challenge.name_small|add:'.jpg' as logo_static %}
                                                 <img src="{% static logo_static %}"></img>
@@ -38,22 +38,66 @@
                                     </div>
                                     <div class="row">
                                         <div class="col text-center">
-                                            <h4>Challenge Completed</h4>
+                                            <h3>Challenge Finished</h3>
+                                        </div>        
+                                    </div>
+                                    {% elif hikes_completed > 0 %} 
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <i class="fas fa-5x fa-hiker text-danger"></i> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <h3>Challenge In Progress</h3>
+                                        </div>        
+                                    </div>
+                                    {% else %}
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <i class="fas fa-5x fa-clock text-warning"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <h3>Challenge Being Planned</h3>
                                         </div>        
                                     </div>
                                     {% endif %} 
-                                    {% if hikes_planned != 0 %}
+                                    {% if hikes_planned > 0 %}
                                     <div class="row">
                                         <div class="col text-center">
-                                            <h4>{{ hikes_planned }} Hikes Planned </h4>
+                                            <h5>{{ hikes_planned }} hikes planned so far</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            {{ hikes_planned_mileage }} miles covered
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            {{ hikes_planned_duration }} hours expected
                                         </div>
                                     </div>
                                     {% endif %}
+                                    {% if hikes_completed > 0 %}
                                     <div class="row">
                                         <div class="col text-center">
-                                            <h4>{{ hikes_completed }} Hikes Completed </h4>
+                                            <h5>{{ hikes_completed }} hikes completed</h5>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            {{ hikes_completed_mileage }} miles covered
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            {{ hikes_completed_duration }} hours
+                                        </div>
+                                    </div>
+                                    {% endif %}
                                 </div>
                                 <div class="col-xl-1"></div>
                             </div>            

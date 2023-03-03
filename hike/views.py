@@ -69,10 +69,26 @@ def challenge(request, challenge_id):
     challenge = Challenge.objects.get(id=challenge_id)
     context["challenge"] = challenge
 
+    # Hike Data 
     hikes = challenge.hikes.all().order_by("-completed_on")
     # context["hikes"] = hikes
-    context["hikes_completed"] = len([1 for hike in hikes if hike.completed_on])
-    context["hikes_planned"] = len(hikes) - context["hikes_completed"]
+    hikes_completed = hikes_completed_mileage = hikes_planned = hikes_planned_mileage = 0
+    hikes_completed_duration = hikes_planned_duration = 0
+    for hike in hikes:
+        if hike.completed_on:
+            hikes_completed += 1
+            hikes_completed_mileage += hike.mileage
+            hikes_completed_duration += hike.duration
+        else:
+            hikes_planned += 1
+            hikes_planned_mileage += hike.mileage 
+            hikes_planned_duration += hike.duration 
+    context["hikes_completed"] = hikes_completed
+    context["hikes_completed_mileage"] = hikes_completed_mileage
+    context["hikes_completed_duration"] = hikes_completed_duration
+    context["hikes_planned"] = hikes_planned 
+    context["hikes_planned_mileage"] = hikes_planned_mileage 
+    context["hikes_planned_duration"] = hikes_planned_duration 
     
     mountains = challenge.mountains.all().order_by("name")
     context["mountains_completed"] = len([1 for mountain in mountains if mountain.rating])
