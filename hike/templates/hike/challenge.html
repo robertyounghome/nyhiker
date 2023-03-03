@@ -5,23 +5,65 @@
 
         <div class="row">
             <div class="col-md-6">
-                <div class="row mb-3">
-                    <div class="col text-center">
-                        {% with 'hike/img/'|add:challenge.name_small|add:'.jpg' as logo_static %}
-                            <img src="{% static logo_static %}"></img>
-                        {% endwith %}
+                <div class="row mx-3 my-3">
+                    <div class="col-12">
+
+                <div class="card h-100">
+                    {% if challenge.completed_on %}
+                        <div class="card-header text-center" style="background-color: rgb(0, 80, 0); color: white"><h2>{{ challenge.name }}</h2>
+                        </div>
+                    {% else %} 
+                        <div class="card-header text-center" style="background-color: rgb(218, 165, 20); color: white "><h2>{{ challenge.name }}</h2>
+                        </div>
+                    {% endif %}
+                        <div class="card-body">
+                            
+                            <div class="row mb-3">
+                                <div class="col-xl-1"></div>
+                                <div class="col-xl-5">
+                                    <div class="row mb-3">
+                                        <div class="col text-center">
+                                            {% with 'hike/img/'|add:challenge.name_small|add:'.jpg' as logo_static %}
+                                                <img src="{% static logo_static %}"></img>
+                                            {% endwith %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 align-self-center">
+                                    {% if challenge.completed_on %}
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <i class="fas fa-5x fa-check text-success"></i> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <h4>Challenge Completed</h4>
+                                        </div>        
+                                    </div>
+                                    {% endif %} 
+                                    {% if hikes_planned != 0 %}
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <h4>{{ hikes_planned }} Hikes Planned </h4>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <h4>{{ hikes_completed }} Hikes Completed </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-1"></div>
+                            </div>            
+                        </div>
+                    </div>
+                    <!-- class card -->
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col text-center">
-                        <h2>{{ challenge.name }}</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <h4>{{ hikes_completed }} / {{ hikes_page_obj.paginator.count }} Hikes Completed </h4>
-                    </div>
-                </div>
+                
+                
                 <div class="row mb-3 mx-3 justify-content-center">
 
                     {% for hike in hikes_page_obj %}

@@ -34,3 +34,8 @@ $hike-dark-red: rgb(120, 5, 0);
 .text-red {
     color:  $hike-dark-red;
 }
+.vcenter {
+    
+    display: inline-block;
+    vertical-align: middle;
+}

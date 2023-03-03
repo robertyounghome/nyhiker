@@ -34,3 +34,9 @@ $hike-dark-red: rgb(120, 0, 0);
 .text-red {
     color:  $hike-dark-red;
 }
+.vcenter {
+    display: flex;
+    // flex: 1 0 50%;
+    // align-items: center;
+    justify-content: center;
+}
