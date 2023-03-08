@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="col mb-3 text-center">
-            <h2>{{ hike.name }}
+            <h2 class="mont">{{ hike.name }}
                 {% if hike.completed_on %}
                 &nbsp;-&nbsp;{{ hike.completed_on}}
                 {% endif %}
@@ -14,12 +14,12 @@
     </div>
     <div class="row mx-md-5 mx-xs-1 my-md-5 my-xs-1 mb-3">
         <div class="col-lg-5 mb-3">
-            <div class="card">
+            <div class="">
                 <div class="row mx-5 my-5 mb-1">
                     <div class="col-4">
                         Range
                     </div>
-                    <div class="col-8">
+                    <div class="col-8 mont">
                         {{ hike.range }}    
                     </div>
                 </div>
@@ -55,6 +55,14 @@
                     </div>
                     <div class="col-8">
                         {% include "./progress_bar.html" with decimal=hike_gain_decimal pct=hike_gain_pct max_value=hike_gain_max_value value=hike.gain %}
+                    </div>
+                </div>
+                <div class="row mx-5 my-5 mb-1">
+                    <div class="col-4">
+                        Mountains
+                    </div>
+                    <div class="col-8 mont">
+                        {{ mountains }}
                     </div>
                 </div>
                 {% if hike.rating %}
@@ -122,22 +130,41 @@
             </div>
         </div>
         <div class="col-lg-1"></div>
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <div class="row mb-3">
-                <div class="col-lg-6">
+                <div class="col-1"></div>
+                <div class="col-lg-5 mb-3">
                     {% include "./carousel.html" %}
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-5 mb-3">
+                    {% if hike.alltrails %}
+                    <iframe class="alltrails" src="{{ hike.alltrails }}" width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="AllTrails: Trail Guides and Maps for Hiking, Camping, and Running"></iframe>
+                    {% endif %}
                 </div>
+                <div class="col-1"></div>
 
             </div>
-            {% if hike.alltrails %}
             <div class="row">
-                <div class="col">
-                    <iframe class="alltrails" src="{{ hike.alltrails }}" width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="AllTrails: Trail Guides and Maps for Hiking, Camping, and Running"></iframe>
+                <div class="col mont">
+                    {% if details %}
+                    <h2 class="text-center">Trip Summary</h2>
+                    {% endif %}
+                    {% for detail in details %} 
+                        {% if detail.order == 1 %}
+                            <div class="row mb-2 mx-1 my-1">
+                                <div class="col text-center">
+                                    <h4>--- {{ detail.hike_part }} ---</h4>
+                                </div>
+                            </div> 
+                        {% endif %}
+                        <div class="row mb-2 mx-1 my-1">
+                            <div class="col">
+                                {{ detail.description }}
+                            </div>
+                        </div>
+                    {% endfor %} 
                 </div>
             </div>
-            {% endif %}
         </div>
     </div>
     

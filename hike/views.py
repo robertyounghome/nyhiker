@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
-from .models import Challenge, Range, Hike, Mountain
+from .models import Challenge, Range, Hike, Mountain, HikeDetail
 from django.core.paginator import Paginator
 import glob
 import cv2 
@@ -27,13 +27,12 @@ def hike_details(request, hike_id):
 
     context['hike'] = hike
 
-    # Find all images for this hike
+    # Find all images for this hike, add a clean list of images to the context
     img_files = f"{BASE_DIR}/hike/static/hike/img/{hike.name_small}/*.jpg"
     img_list = glob.glob(img_files)
     hike_images = []
     for img in img_list:
         hike_images.append(img[img.rfind('/', 0, img.rfind('/')) + 1:])
-    print(hike_images)
     context['hike_images'] = hike_images
 
     # Hike duration progress bar information
@@ -61,6 +60,13 @@ def hike_details(request, hike_id):
     weather = [condition.name for condition in hike.conditions.all()]
     context["weather"] = weather
     
+    # Mountains
+    mountains = [mountain.name for mountain in hike.mountains.all()]
+    context["mountains"] = ', '.join(mountains)
+
+    # Hike Details 
+    context["details"] = HikeDetail.objects.filter(hike=hike).order_by("hike_part__order", "order")
+
     template = loader.get_template('hike/hike_details.html')
     return HttpResponse(template.render(context, request))
 

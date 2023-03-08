@@ -59,14 +59,22 @@ class TrailLink(models.Model):
 
     def __str__(self):
         return f"{self.hike} : {self.name}"
+    
+class HikePart(models.Model):
+    name = models.CharField(max_length=50)
+    order = models.IntegerField()
+
+    def __str__(self): 
+        return f"{self.name}"
 
 class HikeDetail(models.Model):
     hike = models.ForeignKey(Hike, on_delete=models.CASCADE)
+    hike_part = models.ForeignKey(HikePart, null=True, on_delete=models.CASCADE) 
     description = models.TextField()
     order = models.IntegerField()
 
     def __str__(self):
-        return self.hike.name + " : Paragraph " + str(self.order)
+        return f"{self.hike.name} : Part {self.hike_part} : Paragraph {self.order}"
 
 class Challenge(models.Model):
     name = models.CharField(max_length=50)

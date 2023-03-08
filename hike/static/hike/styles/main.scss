@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;1,100&display=swap');
+
 $hike-green: rgb(0, 80, 0);
 $hike-yellow: rgb(218, 165, 20);
 $hike-dark-red: rgb(120, 0, 0);
 
+.mont {
+    font-family: 'Montserrat', sans-serif;
+}
 .navbar-green {
     background: $hike-green !important;
 }
